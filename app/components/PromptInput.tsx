@@ -3,8 +3,9 @@ import { useState, useRef } from "react";
 import { Textarea } from "@/components/shared/ui/Textarea";
 import { H2 } from "@/components/shared/typography";
 import { Button } from "@/components/shared/ui/Button";
+import { PromptResponse } from "@/pages/api/prompt";
 
-export async function getData(text: string) {
+export async function getData(text: string): Promise<PromptResponse> {
   const res = await fetch(`${window.location.origin}/api/prompt`, {
     method: "POST",
     body: text,
@@ -21,17 +22,16 @@ export async function getData(text: string) {
   return res.json();
 }
 
-export default function Input() {
-  const [response, setResponse] = useState(null);
+export function PromptInput() {
+  const [response, setResponse] = useState("");
 
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
   const onClick = async () => {
-    console.log(inputRef);
-    if (inputRef && inputRef.current && inputRef.current.value) {
+    if (inputRef?.current?.value) {
       const data = await getData(inputRef.current.value);
       console.log(data);
-      setResponse(data.text);
+      setResponse(data.content);
     }
   };
 
