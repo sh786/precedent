@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 const useLocalStorage = <T>(
   key: string,
-  initialValue: T,
-): [T, (value: T) => void] => {
+  initialValue: T
+): [T, (_value: T) => void] => {
   const [storedValue, setStoredValue] = useState(initialValue);
 
   useEffect(() => {

@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
-import ReactMarkdown from "react-markdown";
-import Balancer from "react-wrap-balancer";
+import { ReactNode } from 'react';
+import ReactMarkdown from 'react-markdown';
+import Balancer from 'react-wrap-balancer';
 
 export default function Card({
   title,
@@ -16,7 +16,7 @@ export default function Card({
   return (
     <div
       className={`relative col-span-1 h-96 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-md ${
-        large ? "md:col-span-2" : ""
+        large ? 'md:col-span-2' : ''
       }`}
     >
       <div className="flex h-60 items-center justify-center">{demo}</div>
@@ -28,7 +28,7 @@ export default function Card({
           <Balancer>
             <ReactMarkdown
               components={{
-                a: ({ node, ...props }) => (
+                a: ({ node: _node, ...props }) => (
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
@@ -36,7 +36,7 @@ export default function Card({
                     className="font-medium text-gray-800 underline transition-colors"
                   />
                 ),
-                code: ({ node, ...props }) => (
+                code: ({ node: _node, ...props }) => (
                   <code
                     {...props}
                     // @ts-ignore (to fix "Received `true` for a non-boolean attribute `inline`." warning)

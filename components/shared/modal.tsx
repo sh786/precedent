@@ -4,11 +4,11 @@ import {
   useCallback,
   useEffect,
   useRef,
-} from "react";
-import FocusTrap from "focus-trap-react";
-import { AnimatePresence, motion } from "framer-motion";
-import Leaflet from "./leaflet";
-import useWindowSize from "@/lib/hooks/use-window-size";
+} from 'react';
+import FocusTrap from 'focus-trap-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import Leaflet from './leaflet';
+import useWindowSize from '@/lib/hooks/use-window-size';
 
 export default function Modal({
   children,
@@ -23,16 +23,16 @@ export default function Modal({
 
   const onKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
+      if (e.key === 'Escape') {
         setShowModal(false);
       }
     },
-    [setShowModal],
+    [setShowModal]
   );
 
   useEffect(() => {
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
   }, [onKeyDown]);
 
   const { isMobile, isDesktop } = useWindowSize();
@@ -63,7 +63,7 @@ export default function Modal({
               </FocusTrap>
               <motion.div
                 key="desktop-backdrop"
-                className="fixed inset-0 z-30 bg-gray-100 bg-opacity-10 backdrop-blur"
+                className="fixed inset-0 z-30 bg-gray-100/10 backdrop-blur"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}

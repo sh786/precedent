@@ -1,12 +1,12 @@
-import Modal from "@/components/shared/modal";
+import Modal from '@/components/shared/modal';
 import {
   useState,
   Dispatch,
   SetStateAction,
   useCallback,
   useMemo,
-} from "react";
-import Image from "next/image";
+} from 'react';
+import Image from 'next/image';
 
 const DemoModal = ({
   showDemoModal,
@@ -53,6 +53,6 @@ export function useDemoModal() {
 
   return useMemo(
     () => ({ setShowDemoModal, DemoModal: DemoModalCallback }),
-    [setShowDemoModal, DemoModalCallback],
+    [setShowDemoModal, DemoModalCallback]
   );
 }

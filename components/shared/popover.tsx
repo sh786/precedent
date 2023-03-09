@@ -1,18 +1,18 @@
-import { Dispatch, SetStateAction, ReactNode, useRef } from "react";
-import * as PopoverPrimitive from "@radix-ui/react-popover";
-import useWindowSize from "@/lib/hooks/use-window-size";
-import Leaflet from "./leaflet";
+import { Dispatch, SetStateAction, ReactNode } from 'react';
+import * as PopoverPrimitive from '@radix-ui/react-popover';
+import useWindowSize from '@/lib/hooks/use-window-size';
+import Leaflet from './leaflet';
 
 export default function Popover({
   children,
   content,
-  align = "center",
+  align = 'center',
   openPopover,
   setOpenPopover,
 }: {
   children: ReactNode;
   content: ReactNode | string;
-  align?: "center" | "start" | "end";
+  align?: 'center' | 'start' | 'end';
   openPopover: boolean;
   setOpenPopover: Dispatch<SetStateAction<boolean>>;
 }) {
