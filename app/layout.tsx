@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google';
 import localFont from 'next/font/local';
 
 import '@/styles/globals.css';
-import { NavBar } from '@/app/components/NavBar';
+import { NavBar } from '@/components/NavBar';
 import { HasChildren } from '@/lib/propTypes';
 
 const sfPro = localFont({
