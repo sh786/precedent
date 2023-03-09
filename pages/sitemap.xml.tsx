@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequest, NextApiResponse } from 'next';
 
 function generateSiteMap({
   hostname,
@@ -20,7 +20,7 @@ function generateSiteMap({
          </url>
        `;
          })
-         .join("")}
+         .join('')}
      </urlset>
    `;
 }
@@ -30,7 +30,6 @@ function SiteMap() {
 }
 
 export async function getServerSideProps({
-  req,
   res,
 }: {
   req: NextApiRequest;
@@ -51,7 +50,7 @@ export async function getServerSideProps({
     users: [],
   });
 
-  res.setHeader("Content-Type", "text/xml");
+  res.setHeader('Content-Type', 'text/xml');
   // we send the XML to the browser
   res.write(sitemap);
   res.end();

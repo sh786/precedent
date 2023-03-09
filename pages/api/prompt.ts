@@ -1,9 +1,9 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequest, NextApiResponse } from 'next';
 import {
   ChatCompletionResponseMessage,
   Configuration,
   OpenAIApi,
-} from "openai";
+} from 'openai';
 
 const configuration = new Configuration({
   apiKey: process.env.OPEN_AI_KEY,
@@ -14,17 +14,17 @@ export type PromptResponse = ChatCompletionResponseMessage;
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse,
+  res: NextApiResponse
 ) {
   const completion = await openai.createChatCompletion({
-    model: "gpt-3.5-turbo",
+    model: 'gpt-3.5-turbo',
     messages: [
       {
-        role: "system",
-        content: "You are a helpful travel planner.",
+        role: 'system',
+        content: 'You are a helpful travel planner.',
       },
       {
-        role: "user",
+        role: 'user',
         content: req.body,
       },
     ],

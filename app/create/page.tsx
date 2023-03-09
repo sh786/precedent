@@ -1,5 +1,5 @@
-import { H2 } from "@/components/shared/typography";
-import { PromptInput } from "@/app/components/PromptInput";
+import { H2 } from '@/components/shared/typography';
+import { PromptInput } from '@/components/PromptInput';
 
 export default async function Page() {
   return (

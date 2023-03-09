@@ -1,6 +1,6 @@
-import { P, Large } from "@/components/shared/typography";
-import { Plane } from "lucide-react";
-import Link from "next/link";
+import { P, Large } from '@/components/shared/typography';
+import { Plane } from 'lucide-react';
+import Link from 'next/link';
 
 export function NavBar() {
   return (

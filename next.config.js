@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["lh3.googleusercontent.com"],
+    domains: ['lh3.googleusercontent.com'],
   },
   experimental: {
     appDir: true,
@@ -11,8 +11,8 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: "/github",
-        destination: "https://github.com/steven-tey/precedent",
+        source: '/github',
+        destination: 'https://github.com/steven-tey/precedent',
         permanent: false,
       },
     ];

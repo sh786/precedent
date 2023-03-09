@@ -1,4 +1,4 @@
-import { H1 } from "@/components/shared/typography";
+import { H1 } from '@/components/shared/typography';
 
 export default function Page() {
   return (

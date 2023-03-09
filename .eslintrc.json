@@ -1,6 +1,17 @@
 {
-  "extends": ["next/core-web-vitals", "plugin:tailwindcss/recommended"],
-  "plugins": ["tailwindcss"],
+  "extends": [
+    "next",
+    "next/core-web-vitals",
+    "prettier",
+    "plugin:tailwindcss/recommended"
+  ],
+  "plugins": ["prettier", "tailwindcss"],
+  "rules": {
+    "no-unused-vars": [
+      "error",
+      { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }
+    ]
+  },
   "settings": {
     "tailwindcss": {
       "callees": ["cn"]
