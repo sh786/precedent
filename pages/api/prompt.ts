@@ -4,6 +4,7 @@ import {
   Configuration,
   OpenAIApi,
 } from "openai";
+import prisma from "@/lib/prisma";
 
 const configuration = new Configuration({
   apiKey: process.env.OPEN_AI_KEY,
@@ -31,6 +32,15 @@ export default async function handler(
   });
 
   console.log(completion.data.choices[0].message);
+
+  const prismaResponse = await prisma.trip.create({
+    data: {
+      gptResponse: completion.data.choices[0].message?.content || "",
+      prompt: req.body,
+    }
+  });
+
+  console.log(prismaResponse);
 
   res.status(200).json(completion.data.choices[0].message);
 }

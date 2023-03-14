@@ -88,3 +88,10 @@ https://user-images.githubusercontent.com/28986134/212368288-12f41e37-aa8c-4e0a-
 ## Author
 
 - Steven Tey ([@steventey](https://twitter.com/steventey))
+
+## Database Docs
+- https://vercel.com/guides/nextjs-prisma-postgres 
+- https://app.supabase.com/project/rhfoedoizdkccuswvojw 
+- https://www.prisma.io/docs 
+npx prisma db push
+npx prisma studio
