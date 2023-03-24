@@ -19,7 +19,7 @@ const inter = Inter({
 export default function RootLayout({ children }: HasChildren) {
   return (
     <html lang="en">
-      <body className={cn(sfPro.variable, inter.variable, 'bg-slate-300')}>
+      <body className={cn(sfPro.variable, inter.variable, 'bg-slate-100')}>
         <NavBar />
         <main className="flex flex-col py-4 px-8">{children}</main>
       </body>
