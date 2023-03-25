@@ -25,7 +25,7 @@ export default function Page() {
         <H2>Explore Trips</H2>
         <div className="flex flex-wrap gap-4 py-6">
           {mockExploreTrips.map((trip) => (
-            <Card key={trip.name}>
+            <Card key={trip.name} whileHover={{ scale: 1.05 }}>
               <span className=" text-slate-800 md:text-lg">{trip.name}</span>
             </Card>
           ))}
