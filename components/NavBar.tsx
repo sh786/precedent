@@ -13,7 +13,7 @@ export function NavBar() {
         >
           <Large className="text-3xl tracking-wider">TripIt</Large>
           <Small className="text-xs text-slate-700 md:text-sm">
-            build your next great vacation today
+            build your next vacation today
           </Small>
         </Link>
       </Div>
@@ -23,7 +23,7 @@ export function NavBar() {
       >
         <Link href="/create">
           <P className="flex items-center text-sm md:text-base">
-            <Plane size={16} className="mr-1" /> Create a Trip
+            <Plane size={16} className="mr-1" /> Build a Trip
           </P>
         </Link>
       </Div>

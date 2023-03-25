@@ -1,16 +1,16 @@
 import Image from 'next/image';
 import { H1 } from '@/components/shared/typography';
-import travelGenericImg from '@/public/travel-generic.jpg';
+import travel from '@/public/travel.svg';
 import { A } from './motion/A';
 import { Div } from './motion/Div';
 
 export const HeroSection = () => {
   return (
     <section className="">
-      <div className="mx-auto grid max-w-screen-xl px-4 py-8 lg:grid-cols-12 lg:gap-8 lg:py-16 xl:gap-0">
+      <div className="mx-auto grid max-w-screen-xl py-8 lg:grid-cols-12 lg:gap-8 lg:py-16 xl:gap-0">
         <div className="mr-auto place-self-center lg:col-span-7">
           <H1 className="mb-4 max-w-2xl text-4xl font-extrabold leading-none tracking-tight text-slate-800 md:text-5xl xl:text-6xl">
-            Discover the world. Plan your next trip today.
+            Discover the world. Plan your trip today.
           </H1>
           <p className="mb-6 max-w-2xl font-light text-slate-600 md:text-lg lg:mb-8 lg:text-xl">
             With the help of TripIt Assistant, discover new getaways and build
@@ -40,13 +40,7 @@ export const HeroSection = () => {
           className="hidden lg:col-span-5 lg:mt-0 lg:flex"
           whileHover={{ scale: 1.05, rotate: 5 }}
         >
-          <Image
-            src={travelGenericImg}
-            alt="mockup"
-            width={500}
-            height={400}
-            className="rounded-md shadow-md"
-          />
+          <Image src={travel} alt="mockup" width={500} height={400} />
         </Div>
       </div>
     </section>
