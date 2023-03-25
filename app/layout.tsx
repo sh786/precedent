@@ -21,7 +21,7 @@ export default function RootLayout({ children }: HasChildren) {
     <html lang="en">
       <body className={cn(sfPro.variable, inter.variable, 'bg-slate-100')}>
         <NavBar />
-        <main className="flex flex-col py-4 px-10">{children}</main>
+        <main className="flex flex-col p-4 sm:px-10">{children}</main>
       </body>
     </html>
   );

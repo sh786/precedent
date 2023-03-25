@@ -5,7 +5,7 @@ import { Div } from '@/components/motion/Div';
 
 export function NavBar() {
   return (
-    <nav className="flex items-center rounded-b-xl py-4 px-6 text-slate-800">
+    <nav className="flex items-center rounded-b-xl p-4 text-slate-800 sm:px-6">
       <Div whileHover={{ scale: 1.05 }}>
         <Link
           href="/"
