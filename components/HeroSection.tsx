@@ -17,7 +17,7 @@ export const HeroSection = () => {
             your personalized itinerary in minutes.
           </p>
           <A
-            href="/create"
+            href="/build"
             className="mr-3 inline-flex items-center justify-center rounded-md bg-slate-800 px-4 py-3 text-center text-base font-medium text-white focus:ring-4"
             whileHover={{ scale: 1.05 }}
           >

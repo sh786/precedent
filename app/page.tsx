@@ -17,7 +17,7 @@ const mockExploreTrips = [
   },
 ];
 
-export default function Page() {
+export default function HomeLanding() {
   return (
     <div>
       <HeroSection />
