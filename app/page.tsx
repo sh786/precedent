@@ -1,9 +1,36 @@
-import { H1 } from "@/components/shared/typography";
+import { HeroSection } from '@/components/HeroSection';
+import { Card } from '@/components/motion/Card';
+import { H2 } from '@/components/shared/typography';
 
-export default function Page() {
+const mockExploreTrips = [
+  {
+    name: 'Vegas Baby',
+  },
+  {
+    name: 'San Diego Sun',
+  },
+  {
+    name: 'Viva Mexico',
+  },
+  {
+    name: 'Hawaii Honeymoon',
+  },
+];
+
+export default function HomeLanding() {
   return (
-    <H1 className="bg-gradient-to-r from-sky-400 to-slate-600 bg-clip-text text-transparent">
-      TripIt
-    </H1>
+    <div>
+      <HeroSection />
+      <div className="mt-2 text-slate-800">
+        <H2>Explore Trips</H2>
+        <div className="flex flex-wrap gap-4 py-6">
+          {mockExploreTrips.map((trip) => (
+            <Card key={trip.name} whileHover={{ scale: 1.05 }}>
+              <span className=" text-slate-800 md:text-lg">{trip.name}</span>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
