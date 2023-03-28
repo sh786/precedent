@@ -11,7 +11,10 @@ export function NavBar() {
           href="/"
           className="flex flex-col items-baseline gap-x-2 gap-y-1 md:flex-row"
         >
-          <Large className="text-3xl tracking-wider">TripIt</Large>
+          <Large className="text-3xl font-extrabold tracking-wide">
+            <span>Trip</span>
+            <span className="text-camel-orange">It</span>
+          </Large>
           <Small className="text-xs text-slate-700 md:text-sm">
             build your next vacation today
           </Small>

@@ -21,7 +21,7 @@ export default function Page() {
   return (
     <div>
       <HeroSection />
-      <div className=" text-slate-800">
+      <div className="mt-2 text-slate-800">
         <H2>Explore Trips</H2>
         <div className="flex flex-wrap gap-4 py-6">
           {mockExploreTrips.map((trip) => (
