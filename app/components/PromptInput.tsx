@@ -1,13 +1,13 @@
-"use client";
-import { useState, useRef } from "react";
-import { Textarea } from "@/components/shared/ui/Textarea";
-import { H2 } from "@/components/shared/typography";
-import { Button } from "@/components/shared/ui/Button";
-import { PromptResponse } from "@/pages/api/prompt";
+'use client';
+import { useState, useRef } from 'react';
+import { Textarea } from '@/components/shared/ui/Textarea';
+import { H2 } from '@/components/shared/typography';
+import { Button } from '@/components/shared/ui/Button';
+import { PromptResponse } from '@/pages/api/prompt';
 
 export async function getData(text: string): Promise<PromptResponse> {
   const res = await fetch(`${window.location.origin}/api/prompt`, {
-    method: "POST",
+    method: 'POST',
     body: text,
   });
   // The return value is *not* serialized
@@ -16,14 +16,14 @@ export async function getData(text: string): Promise<PromptResponse> {
   // Recommendation: handle errors
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
+    throw new Error('Failed to fetch data');
   }
 
   return res.json();
 }
 
 export function PromptInput() {
-  const [response, setResponse] = useState("");
+  const [response, setResponse] = useState('');
 
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
