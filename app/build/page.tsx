@@ -1,12 +1,27 @@
 'use client';
 
-import { Card } from '@/components/motion/Card';
+import { FormItems } from '@/components/FormItems';
 import { Div } from '@/components/motion/Div';
 import { H2, H3 } from '@/components/shared/typography';
-import { useBuildForm } from '@/lib/hooks/useBuildForm';
-import { cn } from '@/lib/utils';
+import {
+  FormInputName,
+  FormSection,
+  useBuildForm,
+} from '@/lib/hooks/useBuildForm';
 
-const form = {
+export type FormInput = {
+  label: string;
+  value: string;
+  type: 'select';
+};
+
+type FormInputData = {
+  [K in FormSection]: {
+    [T in FormInputName]?: FormInput[];
+  };
+};
+
+const form: FormInputData = {
   destination: {
     domesticOrInternational: [
       {
@@ -21,6 +36,7 @@ const form = {
       },
     ],
   },
+  tripDetails: {},
 };
 
 export default function BuildForm() {
@@ -28,7 +44,7 @@ export default function BuildForm() {
 
   const handleOptionClick = (val: string) => {
     setFormValues({
-      type: 'ADD_RESPONSE',
+      type: 'TOGGLE_RESPONSE',
       section: 'destination',
       inputName: 'domesticOrInternational',
       payload: {
@@ -53,26 +69,13 @@ export default function BuildForm() {
       >
         <H3>Where are you looking?</H3>
         <Div className="my-8 flex w-full flex-row flex-wrap justify-evenly gap-8">
-          {form.destination.domesticOrInternational.map(({ value, label }) => (
-            <Card
-              className={cn(
-                'flex h-48 w-11/12 items-center justify-center p-0 sm:w-5/12 lg:w-1/3 2xl:w-1/4',
-                {
-                  'shadow-camel-orange/80 ring-2 ring-camel-orange/80':
-                    isItemSelected(value),
-                }
-              )}
-              key={value}
-              whileHover={{ scale: 1.05 }}
-            >
-              <button
-                onClick={() => handleOptionClick(value)}
-                className="h-full w-full"
-              >
-                <span className="text-2xl font-semibold">{label}</span>
-              </button>
-            </Card>
-          ))}
+          <FormItems
+            items={form.destination.domesticOrInternational}
+            isItemSelected={(val) =>
+              isItemSelected('destination', 'domesticOrInternational', val)
+            }
+            handleOptionClick={handleOptionClick}
+          />
         </Div>
       </Div>
     </div>
