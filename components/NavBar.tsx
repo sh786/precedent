@@ -24,7 +24,7 @@ export function NavBar() {
         className="ml-auto flex rounded-full bg-slate-800 px-4 py-2 text-white shadow-md"
         whileHover={{ scale: 1.05 }}
       >
-        <Link href="/build">
+        <Link href="/build?section=destination">
           <P className="flex items-center text-sm md:text-base">
             <Plane size={16} className="mr-1" /> Build a Trip
           </P>

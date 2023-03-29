@@ -1,11 +1,11 @@
 'use client';
 
-import { FormItems } from '@/components/FormItems';
+import { FormSection } from '@/components/FormSection';
 import { Div } from '@/components/motion/Div';
-import { H2, H3 } from '@/components/shared/typography';
+import { H2 } from '@/components/shared/typography';
 import {
   FormInputName,
-  FormSection,
+  FormSection as IFormSection,
   useBuildForm,
 } from '@/lib/hooks/useBuildForm';
 
@@ -15,26 +15,36 @@ export type FormInput = {
   type: 'select';
 };
 
+type FormQuestion = {
+  title: string;
+  inputs: FormInput[];
+};
+
+export type FormQuestions = {
+  [T in FormInputName]?: FormQuestion;
+};
+
 type FormInputData = {
-  [K in FormSection]: {
-    [T in FormInputName]?: FormInput[];
-  };
+  [K in IFormSection]: FormQuestions;
 };
 
 const form: FormInputData = {
   destination: {
-    domesticOrInternational: [
-      {
-        label: 'US',
-        value: 'US',
-        type: 'select',
-      },
-      {
-        label: 'International',
-        value: 'INTERNATIONAL',
-        type: 'select',
-      },
-    ],
+    domesticOrInternational: {
+      title: 'Where are you looking to go?',
+      inputs: [
+        {
+          label: 'US',
+          value: 'US',
+          type: 'select',
+        },
+        {
+          label: 'International',
+          value: 'INTERNATIONAL',
+          type: 'select',
+        },
+      ],
+    },
   },
   tripDetails: {},
 };
@@ -67,16 +77,13 @@ export default function BuildForm() {
         animate={{ opacity: 1, scale: 1.0 }}
         transition={{ duration: 1 }}
       >
-        <H3>Where are you looking?</H3>
-        <Div className="my-8 flex w-full flex-row flex-wrap justify-evenly gap-8">
-          <FormItems
-            items={form.destination.domesticOrInternational}
-            isItemSelected={(val) =>
-              isItemSelected('destination', 'domesticOrInternational', val)
-            }
-            handleOptionClick={handleOptionClick}
-          />
-        </Div>
+        <FormSection
+          section={form.destination}
+          isItemSelected={(val) =>
+            isItemSelected('destination', 'domesticOrInternational', val)
+          }
+          handleOptionClick={handleOptionClick}
+        />
       </Div>
     </div>
   );
