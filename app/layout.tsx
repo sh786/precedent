@@ -4,7 +4,7 @@ import localFont from 'next/font/local';
 
 import '@/styles/globals.css';
 import { NavBar } from '@/components/NavBar';
-import { HasChildren } from '@/lib/propTypes';
+import { HasChildren } from '@/lib/types/propTypes';
 
 const sfPro = localFont({
   src: '../styles/SF-Pro-Display-Medium.otf',

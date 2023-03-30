@@ -1,32 +1,17 @@
 import { HeroSection } from '@/components/HeroSection';
 import { Card } from '@/components/motion/Card';
 import { H2 } from '@/components/shared/typography';
-import { Trip } from '@/pages/api/trip';
-import { headers } from 'next/headers';
+import prisma from '@/lib/prisma';
+import { Trip } from '@prisma/client';
 import Link from 'next/link';
 
 async function getData(): Promise<Trip[]> {
-  const headerList = headers();
-  const host = headerList.get('host');
-
-  console.log('get data');
-
-  const res = await fetch(`http://${host}/api/popularTrips`, {
-    method: 'POST',
-  });
-
-  console.log('got a response');
-
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
-  }
-
-  return res.json() as Promise<Trip[]>;
+  const popularTrips = await prisma.trip.findMany();
+  return popularTrips;
 }
 
 export default async function HomeLanding() {
   const trips = await getData();
-  console.log(trips, 'trips.... hmmm');
 
   return (
     <div>
