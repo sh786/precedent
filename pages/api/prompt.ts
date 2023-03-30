@@ -42,7 +42,8 @@ export default async function handler(
   //   }
   // }
 
-  const splitResponse = completion.data.choices[0].message?.content?.split(':') || [];
+  const splitResponse =
+    completion.data.choices[0].message?.content?.split(':') || [];
 
   console.log(completion.data.choices[0].message);
   try {
@@ -55,7 +56,7 @@ export default async function handler(
     });
     console.log(prismaResponse);
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
 
   res.status(200).json(completion.data.choices[0].message);
