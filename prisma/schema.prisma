@@ -12,6 +12,7 @@ model Trip {
   id           String   @id @default(cuid())
   gptResponse  String
   prompt       String
+  location     String
 }
 
 // model Account {
