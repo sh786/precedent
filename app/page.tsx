@@ -5,7 +5,7 @@ import { Trip } from '@/pages/api/trip';
 import { headers } from 'next/headers';
 import Link from 'next/link';
 
-export async function getData(): Promise<Trip[]> {
+async function getData(): Promise<Trip[]> {
   const headerList = headers();
   const host = headerList.get('host');
 
