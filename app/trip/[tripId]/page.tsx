@@ -2,7 +2,7 @@ import { H2 } from '@/components/shared/typography';
 import { Trip } from '@/pages/api/trip';
 import { headers } from 'next/headers';
 
-export async function getData(tripId: string): Promise<Trip> {
+async function getData(tripId: string): Promise<Trip> {
   const headerList = headers();
   const host = headerList.get('host');
 
