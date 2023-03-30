@@ -1,28 +1,56 @@
 'use client';
 
-// import { Card } from '@/components/motion/Card';
-// import { FormSection } from '@/components/FormSection';
+import { FormQuestion } from '@/components/FormQuestion';
 import { Div } from '@/components/motion/Div';
-import { TileSelect } from '@/components/shared/form/TileSelect';
-import { H2, H4 } from '@/components/shared/typography';
-// import { cn } from '@/lib/utils';
+import { H2 } from '@/components/shared/typography';
+import { Button } from '@/components/shared/ui/Button';
+import { Input } from '@/lib/types/form';
+import { Car, Globe2, Grip, Home, Plane, Train } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ReactNode, useEffect, useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 export type BuildFormData = {
   domesticOrInternational: string;
+  departureCity: string;
+  gettingThere: string;
 };
 
 type Section = 'destination' | 'tripDetails';
 const sections: Section[] = ['destination', 'tripDetails'];
 
+const questionToSelectOptions: Record<string, Input[]> = {
+  domesticOrInternational: [
+    { label: 'Domestic', value: 'domestic', icon: Home },
+    { label: 'International', value: 'international', icon: Globe2 },
+    { label: 'Anywhere', value: 'anywhere', icon: Grip },
+  ],
+  gettingThere: [
+    { label: 'Drive', value: 'drive', icon: Car },
+    { label: 'Fly', value: 'fly', icon: Plane },
+    { label: 'Train', value: 'train', icon: Train },
+    { label: 'All', value: 'any transportation method', icon: Grip },
+  ],
+};
+
+const questionToInput: Record<string, Input> = {
+  departureCity: {
+    label: 'Departure City',
+    value: 'departureCity',
+    helperText: 'e.g. "New York City" or "New York City or Los Angeles"',
+  },
+};
+
 export default function BuildForm() {
   const [currentSection, setCurrentSection] = useState(1);
 
-  const { control, handleSubmit } = useForm<BuildFormData>();
+  const { control, register, handleSubmit, watch } = useForm<BuildFormData>();
   const router = useRouter();
   const searchParams = useSearchParams();
+
+  const domesticOrInternational = watch('domesticOrInternational');
+  const departureCity = watch('departureCity');
+  const gettingThere = watch('gettingThere');
 
   useEffect(() => {
     const sectionFromParam = searchParams?.get('section') as Section;
@@ -54,31 +82,32 @@ export default function BuildForm() {
             >
               <H2>Tell us about your destination preferences</H2>
             </Div>
-            <Div
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1.0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <H4>Would you prefer to stay in the US, or seek beyond?</H4>
-              <Div className="my-8 flex w-full flex-row flex-wrap justify-evenly gap-8">
-                <Controller
-                  name="domesticOrInternational"
-                  control={control}
-                  rules={{ required: true }}
-                  render={({ field: { onChange, value } }) => (
-                    <TileSelect
-                      options={[
-                        { label: 'Domestic', value: 'domestic' },
-                        { label: 'International', value: 'international' },
-                        { label: 'Anywhere', value: 'anywhere' },
-                      ]}
-                      onChange={(val) => onChange(val)}
-                      value={value}
-                    />
-                  )}
-                />
-              </Div>
-            </Div>
+            <FormQuestion
+              name="domesticOrInternational"
+              control={control}
+              register={register}
+              options={questionToSelectOptions.domesticOrInternational}
+              title="Would you prefer to stay in the US, or travel internationally?"
+            />
+            {domesticOrInternational && (
+              <FormQuestion
+                name="departureCity"
+                control={control}
+                register={register}
+                soloInput={questionToInput.departureCity}
+                title="What city(s) would you like to depart from?"
+              />
+            )}
+            {departureCity && (
+              <FormQuestion
+                name="gettingThere"
+                control={control}
+                register={register}
+                options={questionToSelectOptions.gettingThere}
+                title="How would you like to get there?"
+              />
+            )}
+            {gettingThere && <Button className="mt-4 w-full">Continue</Button>}
           </>
         );
       default:
