@@ -5,12 +5,12 @@
     "prettier",
     "plugin:tailwindcss/recommended"
   ],
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "prettier", "tailwindcss"],
+  "plugins": ["prettier", "tailwindcss"],
   "rules": {
-    // Note: you must disable the base rule as it can report incorrect errors
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": "error"
+    "no-unused-vars": [
+      "error",
+      { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }
+    ]
   },
   "settings": {
     "tailwindcss": {

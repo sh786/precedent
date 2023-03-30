@@ -4,6 +4,7 @@ import {
   Configuration,
   OpenAIApi,
 } from 'openai';
+import prisma from '@/lib/prisma';
 
 const configuration = new Configuration({
   apiKey: process.env.OPEN_AI_KEY,
@@ -30,7 +31,33 @@ export default async function handler(
     ],
   });
 
+  // test data to avoid hitting gpt
+  // {
+  //   data: {
+  //     choices: [
+  //       {
+  //         message: 'hello world'
+  //       }
+  //     ]
+  //   }
+  // }
+
+  const splitResponse =
+    completion.data.choices[0].message?.content?.split(':') || [];
+
   console.log(completion.data.choices[0].message);
+  try {
+    const prismaResponse = await prisma.trip.create({
+      data: {
+        gptResponse: completion.data.choices[0].message?.content || '',
+        prompt: req.body,
+        location: splitResponse[0] || '',
+      },
+    });
+    console.log(prismaResponse);
+  } catch (e) {
+    console.log(e);
+  }
 
   res.status(200).json(completion.data.choices[0].message);
 }

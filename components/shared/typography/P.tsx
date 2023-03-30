@@ -1,4 +1,4 @@
-import { BaseComponent } from '@/lib/propTypes';
+import { BaseComponent } from '@/lib/types/propTypes';
 import { cn } from '@/lib/utils';
 
 export function P({ children, className }: BaseComponent) {

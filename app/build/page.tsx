@@ -1,52 +1,26 @@
 'use client';
 
-import { FormSection } from '@/components/FormSection';
+import { Card } from '@/components/motion/Card';
 import { Div } from '@/components/motion/Div';
-import { H2 } from '@/components/shared/typography';
-import {
-  FormInputName,
-  FormSection as IFormSection,
-  useBuildForm,
-} from '@/lib/hooks/useBuildForm';
+import { H2, H3 } from '@/components/shared/typography';
+import { useBuildForm } from '@/lib/hooks/useBuildForm';
+import { cn } from '@/lib/utils';
 
-export type FormInput = {
-  label: string;
-  value: string;
-  type: 'select';
-};
-
-type FormQuestion = {
-  title: string;
-  inputs: FormInput[];
-};
-
-export type FormQuestions = {
-  [T in FormInputName]?: FormQuestion;
-};
-
-type FormInputData = {
-  [K in IFormSection]: FormQuestions;
-};
-
-const form: FormInputData = {
+const form = {
   destination: {
-    domesticOrInternational: {
-      title: 'Where are you looking to go?',
-      inputs: [
-        {
-          label: 'US',
-          value: 'US',
-          type: 'select',
-        },
-        {
-          label: 'International',
-          value: 'INTERNATIONAL',
-          type: 'select',
-        },
-      ],
-    },
+    domesticOrInternational: [
+      {
+        label: 'US',
+        value: 'US',
+        type: 'select',
+      },
+      {
+        label: 'International',
+        value: 'INTERNATIONAL',
+        type: 'select',
+      },
+    ],
   },
-  tripDetails: {},
 };
 
 export default function BuildForm() {
@@ -54,7 +28,7 @@ export default function BuildForm() {
 
   const handleOptionClick = (val: string) => {
     setFormValues({
-      type: 'TOGGLE_RESPONSE',
+      type: 'ADD_RESPONSE',
       section: 'destination',
       inputName: 'domesticOrInternational',
       payload: {
@@ -77,13 +51,29 @@ export default function BuildForm() {
         animate={{ opacity: 1, scale: 1.0 }}
         transition={{ duration: 1 }}
       >
-        <FormSection
-          section={form.destination}
-          isItemSelected={(val) =>
-            isItemSelected('destination', 'domesticOrInternational', val)
-          }
-          handleOptionClick={handleOptionClick}
-        />
+        <H3>Where are you looking?</H3>
+        <Div className="my-8 flex w-full flex-row flex-wrap justify-evenly gap-8">
+          {form.destination.domesticOrInternational.map(({ value, label }) => (
+            <Card
+              className={cn(
+                'flex h-48 w-11/12 items-center justify-center p-0 sm:w-5/12 lg:w-1/3 2xl:w-1/4',
+                {
+                  'shadow-camel-orange/80 ring-2 ring-camel-orange/80':
+                    isItemSelected(value),
+                }
+              )}
+              key={value}
+              whileHover={{ scale: 1.05 }}
+            >
+              <button
+                onClick={() => handleOptionClick(value)}
+                className="h-full w-full"
+              >
+                <span className="text-2xl font-semibold">{label}</span>
+              </button>
+            </Card>
+          ))}
+        </Div>
       </Div>
     </div>
   );

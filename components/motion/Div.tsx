@@ -1,6 +1,6 @@
 'use client';
 
-import { BaseComponent } from '@/lib/propTypes';
+import { BaseComponent } from '@/lib/types/propTypes';
 import { AnimatePresence, motion, MotionProps } from 'framer-motion';
 
 export const Div = ({ children, ...attrs }: BaseComponent & MotionProps) => (
