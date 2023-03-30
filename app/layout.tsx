@@ -11,6 +11,11 @@ const sfPro = localFont({
   variable: '--font-sf',
 });
 
+const calSans = localFont({
+  src: '../styles/CalSans-SemiBold.otf',
+  variable: '--font-cal',
+});
+
 const inter = Inter({
   variable: '--font-inter',
   subsets: ['latin'],
@@ -23,11 +28,12 @@ export default function RootLayout({ children }: HasChildren) {
         className={cn(
           sfPro.variable,
           inter.variable,
-          'bg-slate-100 text-slate-800'
+          calSans.variable,
+          'bg-slate-100 font-default text-slate-800'
         )}
       >
         <NavBar />
-        <main className="flex flex-col p-4 sm:px-10">{children}</main>
+        <main className="flex flex-col p-4 sm:px-6">{children}</main>
       </body>
     </html>
   );
