@@ -7,7 +7,11 @@ import { Input } from '@/lib/types/form';
 import { Card } from './motion/Card';
 import { Button } from './shared/ui/Button';
 import { ArrowRight } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import {
+  addHideMobileKeyboardOnReturnListener,
+  clearMobileKeyboardListener,
+} from '@/lib/utils';
 
 type FormQuestionProps = {
   name: keyof BuildFormData;
@@ -26,6 +30,21 @@ export const FormQuestion = ({
   title,
 }: FormQuestionProps) => {
   const [localValue, setLocalValue] = useState('');
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    const input = inputRef.current;
+    let listener: (_keyboardEvent: globalThis.KeyboardEvent) => void;
+    if (input) {
+      listener = addHideMobileKeyboardOnReturnListener(input);
+    }
+
+    return () => {
+      if (listener && input) {
+        clearMobileKeyboardListener(input, listener);
+      }
+    };
+  }, []);
 
   return (
     <Div
@@ -40,6 +59,7 @@ export const FormQuestion = ({
           damping: 20,
         },
       }}
+      id={name}
     >
       <H4>{title}</H4>
       <Div className="my-4 flex w-full flex-row flex-wrap justify-evenly gap-8">
@@ -68,6 +88,7 @@ export const FormQuestion = ({
                   <>
                     <Card className="flex-1 p-0">
                       <input
+                        ref={inputRef}
                         className="w-full bg-inherit px-2 py-3 font-medium focus-visible:outline-camel-orange/60"
                         value={localValue}
                         onChange={(e) => setLocalValue(e.target.value)}

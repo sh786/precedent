@@ -5,7 +5,8 @@ import { Div } from '@/components/motion/Div';
 import { H2 } from '@/components/shared/typography';
 import { Button } from '@/components/shared/ui/Button';
 import { Input } from '@/lib/types/form';
-import { Car, Globe2, Grip, Home, Plane, Train } from 'lucide-react';
+import { scrollToElement } from '@/lib/utils';
+import { ArrowDown, Car, Globe2, Grip, Home, Plane, Train } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ReactNode, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -65,10 +66,10 @@ export default function BuildForm() {
     console.log('Form data: ', data);
   };
 
-  // const handleNext = () => {
-  //   setCurrentSection(currentSection + 1);
-  //   router.push(`${location.pathname}?section=${sections[currentSection + 1]}`);
-  // };
+  const handleContinueBtn = () => {
+    // TODO: Change to a scroll to of the furthest incomplete FormQuestion
+    scrollToElement('departureCity');
+  };
 
   const renderSection = (section: number): ReactNode => {
     switch (section) {
@@ -116,10 +117,19 @@ export default function BuildForm() {
   };
 
   return (
-    <div className="mt-2 w-full">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        {renderSection(currentSection)}
-      </form>
-    </div>
+    <>
+      <div className="mt-2 w-full">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          {renderSection(currentSection)}
+        </form>
+      </div>
+      {currentSection === 0 && domesticOrInternational && (
+        <div className="fixed right-4 bottom-4 flex items-center justify-center rounded-full bg-slate-800 p-3 text-white shadow-lg sm:hidden">
+          <button onClick={handleContinueBtn}>
+            <ArrowDown size={32} />
+          </button>
+        </div>
+      )}
+    </>
   );
 }

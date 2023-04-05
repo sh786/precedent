@@ -67,3 +67,39 @@ export const truncate = (str: string, length: number) => {
   if (!str || str.length <= length) return str;
   return `${str.slice(0, length)}...`;
 };
+
+const hideMobileListenerCallback = (
+  keyboardEvent: globalThis.KeyboardEvent,
+  element: HTMLElement
+) => {
+  const key = keyboardEvent.code || keyboardEvent.keyCode;
+  if (key === 'Enter' || key === 13) {
+    element.blur();
+  }
+};
+
+export const addHideMobileKeyboardOnReturnListener = (element: HTMLElement) => {
+  const listenerCallback = (keyboardEvent: globalThis.KeyboardEvent) =>
+    hideMobileListenerCallback(keyboardEvent, element);
+
+  element.addEventListener('keyup', listenerCallback);
+
+  return listenerCallback;
+};
+
+export const clearMobileKeyboardListener = (
+  element: HTMLElement,
+  listenerCallback: (_keyboardEvent: globalThis.KeyboardEvent) => void
+) => {
+  element.removeEventListener('keyup', listenerCallback);
+};
+
+export const scrollToElement = (elID: string) => {
+  const el = document.getElementById(elID);
+  if (!el) return;
+
+  window.scrollTo({
+    top: el.offsetTop - 60,
+    behavior: 'smooth',
+  });
+};
